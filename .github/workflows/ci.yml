@@ -19,6 +19,11 @@ jobs:
         run: npm run typecheck
       - name: Test (vitest — full suite)
         run: npm test
+      - name: Simulation determinism (same seed → identical tearsheet)
+        run: |
+          npm run sim -- --days 60 --seed 7 --out /tmp/sim-a.html
+          npm run sim -- --days 60 --seed 7 --out /tmp/sim-b.html
+          diff /tmp/sim-a.html /tmp/sim-b.html && echo "sim is deterministic"
       - name: Web typecheck (apps/web)
         run: npm run web:typecheck
       - name: Web build (Next.js production build)
