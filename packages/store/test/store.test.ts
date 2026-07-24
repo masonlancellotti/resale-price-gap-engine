@@ -202,6 +202,15 @@ describe("SqliteStore — persistence", () => {
     cleanup(dir);
   });
 
+  test("creates a missing parent directory (fresh checkout, gitignored data/)", async () => {
+    const path = join(dir, "nested", "sub", "flip.db");
+    const s = new SqliteStore(path); // must not throw on a non-existent parent dir
+    await s.putOpportunity(opp({ id: "d" }));
+    expect((await s.getOpportunity("d"))?.id).toBe("d");
+    s.close();
+    cleanup(dir);
+  });
+
   test("migrations are recorded once and re-running is a no-op", async () => {
     const path = join(dir, "flip.db");
     const s1 = new SqliteStore(path);

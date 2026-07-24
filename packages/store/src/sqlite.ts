@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { readdirSync, readFileSync } from "node:fs";
+import { mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import Database from "better-sqlite3";
@@ -134,6 +134,11 @@ export class SqliteStore implements Store {
   readonly #db: Database.Database;
 
   constructor(pathOrDb: string | Database.Database, opts: SqliteStoreOptions = {}) {
+    if (typeof pathOrDb === "string" && pathOrDb !== ":memory:" && pathOrDb !== "") {
+      // Create the parent directory so a fresh checkout can point FLIP_DB_PATH at ./data/flip.db
+      // (data/ is gitignored and won't exist yet) without a "directory does not exist" error.
+      mkdirSync(dirname(pathOrDb), { recursive: true });
+    }
     this.#db = typeof pathOrDb === "string" ? new Database(pathOrDb) : pathOrDb;
     this.#db.pragma("journal_mode = WAL");
     runMigrations(this.#db, opts.migrationsDir ?? MIGRATIONS_DIR);

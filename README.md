@@ -7,7 +7,7 @@ account → learn** loop behind an exact integer-cents double-entry ledger. Ever
 the whole system runs — and is tested — **fully offline**, with no keys, no network, and no database.
 Flipping to live eBay + LLM extraction is a one-line config change, not a code change.
 
-- **304 tests, green** · `tsc -b` clean · Next.js 15 terminal UI that demos entirely offline.
+- **305 tests, green** · `tsc -b` clean · Next.js 15 terminal UI that demos entirely offline.
 - Runs the *real* engine over a deterministic demo corpus out of the box — the same code path the
   live system uses, just fed a fixture.
 - **Measured like a fund.** A deterministic 90-day market simulation drives the real engine and ledger
@@ -61,7 +61,7 @@ Requires **Node 22** (see `.nvmrc`).
 
 ```bash
 npm install
-npm test              # vitest — 304 tests, no network, no keys
+npm test              # vitest — 305 tests, no network, no keys
 npm run typecheck     # tsc -b across all 42 packages
 npm run demo          # the terminal UI at http://localhost:3000 (seeds + boots)
 ```
@@ -194,7 +194,7 @@ See [`.env.example`](.env.example) for the full list. Copy it to `.env` (gitigno
 ## Testing
 
 ```bash
-npm test          # vitest run — 304 tests across 46 files
+npm test          # vitest run — 305 tests across 46 files
 npm run typecheck # tsc -b — strict, NodeNext, exactOptionalPropertyTypes, noUncheckedIndexedAccess
 ```
 
