@@ -9,6 +9,7 @@ const FLIP_PACKAGES = [
   "@flip-desk/stats", "@flip-desk/net", "@flip-desk/llm", "@flip-desk/policy", "@flip-desk/pipeline",
   "@flip-desk/underwrite", "@flip-desk/appraise", "@flip-desk/rank", "@flip-desk/identify",
   "@flip-desk/providers", "@flip-desk/engine", "@flip-desk/adapter-ebay",
+  "@flip-desk/sim", "@flip-desk/bookkeeper",
 ];
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -18,6 +19,9 @@ const nextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: repoRoot,
   transpilePackages: FLIP_PACKAGES,
+  // better-sqlite3 is a native binding — never bundle it. It is only required at runtime when
+  // FLIP_DB_PATH is set (SqliteStore); the default demo never touches it.
+  serverExternalPackages: ["better-sqlite3"],
   webpack: (config) => {
     config.resolve.extensionAlias = {
       ".js": [".ts", ".tsx", ".js"],

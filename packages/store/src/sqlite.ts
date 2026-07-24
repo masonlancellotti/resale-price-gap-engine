@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import Database from "better-sqlite3";
 import type { Cents } from "@flip-desk/money";
@@ -30,8 +30,11 @@ import type { OpportunityFilter, Store } from "./store.js";
  * no currency value ever passes through a float.
  */
 
-/** Repo-root db/sqlite directory, resolved from this module (works from src and from dist). */
-const MIGRATIONS_DIR = fileURLToPath(new URL("../../../db/sqlite/", import.meta.url));
+/**
+ * Repo-root db/sqlite directory, resolved from this module (works from src and from dist). Built with
+ * path ops rather than `new URL('../…', import.meta.url)` so bundlers don't treat it as an asset ref.
+ */
+const MIGRATIONS_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "db", "sqlite");
 
 export interface AppliedMigration {
   readonly name: string;

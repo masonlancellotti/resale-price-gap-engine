@@ -18,6 +18,7 @@
     "@flip-desk/money": "*",
     "@flip-desk/pipeline": "*",
     "@flip-desk/providers": "*",
+    "@flip-desk/sim": "*",
     "@flip-desk/store": "*"
   },
   "scripts": {
