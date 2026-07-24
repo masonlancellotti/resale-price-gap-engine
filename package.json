@@ -1,0 +1,36 @@
+{
+  "name": "flip-desk",
+  "version": "0.0.0",
+  "private": true,
+  "description": "FLIP DESK — compliance-first resale-arbitrage engine. A TypeScript monorepo running the full discover -> underwrite -> buy -> sell -> account loop behind an exact integer-cents ledger.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "packages/*",
+    "packages/adapters/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -b",
+    "build": "tsc -b",
+    "clean": "tsc -b --clean",
+    "gate:phase0": "vitest run --reporter=verbose",
+    "web:dev": "npm -w @flip-desk/web run dev",
+    "web:build": "npm -w @flip-desk/web run build",
+    "web:typecheck": "npm -w @flip-desk/web run typecheck",
+    "web:start": "npm -w @flip-desk/web run start"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "fast-check": "^3.23.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  }
+}

@@ -1,0 +1,27 @@
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+.turbo/
+coverage/
+
+# env & secrets — never commit
+.env
+.env.*
+!.env.example
+*.key
+*.age
+secrets.*.yaml
+
+# local infra volumes
+.data/
+pgdata/
+miniodata/
+
+# editor / os
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log
