@@ -1,0 +1,58 @@
+# FLIP DESK local infra. Single box, boring parts. NOT required to run the offline test suite or the
+# offline web demo — both use in-memory fakes. This stack exists for the persistence roadmap
+# (wiring the Store seam to Postgres/pgvector); see db/README.md and docs/ARCHITECTURE.md.
+#
+# The credentials below are throwaway local-dev placeholders. Replace every CHANGE_ME before using
+# this stack anywhere that is not your own laptop, and keep the matching values in your .env (never
+# commit .env). Bring up with: docker compose up -d
+name: flip-desk
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: flip
+      POSTGRES_PASSWORD: CHANGE_ME # local-dev only — set a real secret via .env in any shared setting
+      POSTGRES_DB: flipdesk
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.data/pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flip -d flipdesk"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./.data/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: flip
+      MINIO_ROOT_PASSWORD: CHANGE_ME # local-dev only — set a real secret via .env in any shared setting
+    ports:
+      - "9000:9000" # S3 API
+      - "9001:9001" # console
+    volumes:
+      - ./.data/minio:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# Volumes live under ./.data (gitignored). Nightly pg_dump + WAL archiving to off-box storage is a
+# deployment concern, not wired here.
