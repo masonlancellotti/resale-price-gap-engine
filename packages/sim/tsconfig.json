@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts"],
+  "references": [
+    { "path": "../core" },
+    { "path": "../money" },
+    { "path": "../stats" },
+    { "path": "../engine" },
+    { "path": "../identify" },
+    { "path": "../pipeline" },
+    { "path": "../providers" },
+    { "path": "../underwrite" },
+    { "path": "../bookkeeper" },
+    { "path": "../llm" },
+    { "path": "../adapters/ebay" }
+  ]
+}

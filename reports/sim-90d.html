@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>FLIP DESK — simulated tearsheet · seed 42</title>
+<style>
+:root{--bg:#0a0e12;--bg-elev:#10161d;--bg-elev-2:#161e28;--line:#1f2a37;--line-bright:#2b3a4d;--fg:#d7e0ea;--fg-dim:#8595a7;--fg-faint:#566274;--green:#4ade80;--amber:#fbbf24;--red:#f87171;--blue:#60a5fa;--mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace}
+@media (prefers-color-scheme:light){:root{--bg:#f4f6f8;--bg-elev:#fff;--bg-elev-2:#eef1f4;--line:#d9dee4;--line-bright:#c3cbd4;--fg:#1a2229;--fg-dim:#556575;--fg-faint:#8695a4;--green:#128a4a;--red:#c02626;--blue:#1d5fd0}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--mono);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+.num{font-variant-numeric:tabular-nums}
+.pos{color:var(--green)}.neg{color:var(--red)}.faint{color:var(--fg-faint)}.dim{color:var(--fg-dim)}
+.brand{color:var(--green);font-weight:700;letter-spacing:.16em;font-size:12px}
+h1{font-size:20px;letter-spacing:-.01em;margin:6px 0 4px}
+.banner{margin:14px 0 22px;padding:9px 12px;border:1px solid color-mix(in srgb,var(--amber) 40%,transparent);border-radius:6px;background:color-mix(in srgb,var(--amber) 9%,transparent);color:var(--amber);font-size:12px}
+.meta{color:var(--fg-dim);font-size:12px;margin-bottom:22px}
+.card{border:1px solid var(--line);background:var(--bg-elev);border-radius:8px;padding:16px;margin-bottom:16px}
+.card>h2{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--fg-faint);margin:0 0 14px}
+.kgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:680px){.kgrid{grid-template-columns:repeat(2,1fr)}}
+.kpi .k{color:var(--fg-faint);text-transform:uppercase;font-size:10px;letter-spacing:.08em;margin-bottom:3px}
+.kpi .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.kpi .hint{color:var(--fg-faint);font-size:10.5px;line-height:1.35;margin-top:4px}
+.chart{width:100%;height:auto;display:block}
+.axis{stroke:var(--line-bright);stroke-width:1}
+.legend{display:flex;gap:16px;margin-top:8px;color:var(--fg-dim);font-size:11px}
+.legend .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.cov{display:flex;align-items:center;gap:12px;margin:8px 0}
+.cov-l{width:88px;color:var(--fg-dim)}
+.cov-track{position:relative;height:12px;background:var(--bg-elev-2);border:1px solid var(--line);border-radius:3px}
+.cov-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green);opacity:.55;border-radius:2px}
+.cov-tick{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--fg)}
+.cov-v{width:120px;text-align:right}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{text-align:left;color:var(--fg-faint);text-transform:uppercase;font-size:10px;letter-spacing:.07em;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:7px 8px;border-bottom:1px solid var(--line)}
+td.r,th.r{text-align:right}
+.spark{width:80px}
+.spark .bar{display:inline-block;height:8px;border-radius:2px}
+.spark .bar.pos{background:var(--green)}.spark .bar.neg{background:var(--red)}
+.foot{color:var(--fg-faint);font-size:11px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">◆ FLIP DESK</div>
+  <h1>Simulated tearsheet</h1>
+  <div class="banner">⚠ Simulated marketplace (seeded synthetic data) — methodology in docs/SIMULATION.md</div>
+  <div class="meta">Seed <b class="num">42</b> · 90-day horizon from 2026-01-05 · 1630 listings seen, 22 bought, 18 flips settled</div>
+
+  <div class="card">
+    <h2>Headline</h2>
+    <div class="kgrid">
+      <div class="kpi"><div class="k">Money-weighted return</div><div class="v pos">+127.6%</div><div class="hint">Return over the 90 days, weighted by when cash was actually deployed</div></div>
+      <div class="kpi"><div class="k">Total return</div><div class="v pos">+89.3%</div><div class="hint">Final equity vs every dollar contributed</div></div>
+      <div class="kpi"><div class="k">Net profit</div><div class="v pos">$1786.69</div><div class="hint">Realized profit across all settled flips</div></div>
+      <div class="kpi"><div class="k">Hit rate</div><div class="v ">88.9%</div><div class="hint">Share of flips that sold for a profit</div></div>
+      <div class="kpi"><div class="k">Max drawdown</div><div class="v ">2.1%</div><div class="hint">Deepest dip in equity from a prior high</div></div>
+      <div class="kpi"><div class="k">Capital deployed</div><div class="v ">24.5%</div><div class="hint">Avg. share of the bankroll tied up in stock — the rest waits for deals</div></div>
+      <div class="kpi"><div class="k">Fee burden</div><div class="v ">13.2%</div><div class="hint">Marketplace fees as a share of sale proceeds</div></div>
+      <div class="kpi"><div class="k">Median hold</div><div class="v ">10d</div><div class="hint">Typical days from buy to sale</div></div>
+    </div>
+    <div class="foot">Annualized IRR +3507% — directional only: annualizing a 90-day window inflates the figure heavily. Read the money-weighted return above instead.</div>
+  </div>
+
+  <div class="card">
+    <h2>Equity · cash + inventory</h2>
+    <svg viewBox="0 0 760 240" role="img" aria-label="Equity, cash and inventory over 90 days" preserveAspectRatio="none" class="chart">
+  <line x1="8" y1="218.0" x2="752" y2="218.0" class="axis"/>
+  <path d="M8.0,218.0 L8.0,176.9 L16.4,176.9 L24.7,176.9 L33.1,176.9 L41.4,184.0 L49.8,184.0 L58.2,184.0 L66.5,189.7 L74.9,189.7 L83.2,189.7 L91.6,192.9 L100.0,197.0 L108.3,197.0 L116.7,197.0 L125.0,197.0 L133.4,202.9 L141.8,202.9 L150.1,202.9 L158.5,202.9 L166.8,195.1 L175.2,195.1 L183.6,187.6 L191.9,177.5 L200.3,177.5 L208.6,160.6 L217.0,160.6 L225.3,160.6 L233.7,160.6 L242.1,160.6 L250.4,160.6 L258.8,141.7 L267.1,141.7 L275.5,141.7 L283.9,133.2 L292.2,133.2 L300.6,117.3 L308.9,117.3 L317.3,117.3 L325.7,131.4 L334.0,131.4 L342.4,131.4 L350.7,138.7 L359.1,138.7 L367.5,138.7 L375.8,138.7 L384.2,138.7 L392.5,138.7 L400.9,138.7 L409.3,145.0 L417.6,158.0 L426.0,158.0 L434.3,157.8 L442.7,157.8 L451.1,146.4 L459.4,156.7 L467.8,138.0 L476.1,147.7 L484.5,147.7 L492.9,147.7 L501.2,147.7 L509.6,123.2 L517.9,127.1 L526.3,127.1 L534.7,127.1 L543.0,127.1 L551.4,106.7 L559.7,93.3 L568.1,93.3 L576.4,93.3 L584.8,93.3 L593.2,86.3 L601.5,74.1 L609.9,74.1 L618.2,81.2 L626.6,66.6 L635.0,72.8 L643.3,59.8 L651.7,59.8 L660.0,59.8 L668.4,59.8 L676.8,65.3 L685.1,71.9 L693.5,71.9 L701.8,71.9 L710.2,71.9 L718.6,71.9 L726.9,71.9 L735.3,54.6 L743.6,54.6 L752.0,51.8 L752.0,218.0 Z" fill="var(--blue)" fill-opacity="0.16"/>
+  <path d="M8.0,176.9 L16.4,176.9 L24.7,176.9 L33.1,176.9 L41.4,176.9 L49.8,176.9 L58.2,176.9 L66.5,176.9 L74.9,176.9 L83.2,176.9 L91.6,176.9 L100.0,176.9 L108.3,176.9 L116.7,176.9 L125.0,176.9 L133.4,176.9 L141.8,176.9 L150.1,176.9 L158.5,176.9 L166.8,173.2 L175.2,173.2 L183.6,171.4 L191.9,167.1 L200.3,167.1 L208.6,157.3 L217.0,157.3 L225.3,157.3 L233.7,157.3 L242.1,157.3 L250.4,157.3 L258.8,126.5 L267.1,126.5 L275.5,126.5 L283.9,122.8 L292.2,122.8 L300.6,114.0 L308.9,114.0 L317.3,114.0 L325.7,114.0 L334.0,114.0 L342.4,114.0 L350.7,114.0 L359.1,114.0 L367.5,114.0 L375.8,114.0 L384.2,114.0 L392.5,114.0 L400.9,114.0 L409.3,114.0 L417.6,114.0 L426.0,114.0 L434.3,111.1 L442.7,111.1 L451.1,106.6 L459.4,106.6 L467.8,100.9 L476.1,100.9 L484.5,100.9 L492.9,100.9 L501.2,100.9 L509.6,70.1 L517.9,70.1 L526.3,70.1 L534.7,70.1 L543.0,70.1 L551.4,65.8 L559.7,59.6 L568.1,59.6 L576.4,59.6 L584.8,59.6 L593.2,62.8 L601.5,54.5 L609.9,54.5 L618.2,54.5 L626.6,47.0 L635.0,47.0 L643.3,39.9 L651.7,39.9 L660.0,39.9 L668.4,39.9 L676.8,39.9 L685.1,39.9 L693.5,39.9 L701.8,39.9 L710.2,39.9 L718.6,39.9 L726.9,39.9 L735.3,28.9 L743.6,28.9 L752.0,23.7 L752.0,51.8 L743.6,54.6 L735.3,54.6 L726.9,71.9 L718.6,71.9 L710.2,71.9 L701.8,71.9 L693.5,71.9 L685.1,71.9 L676.8,65.3 L668.4,59.8 L660.0,59.8 L651.7,59.8 L643.3,59.8 L635.0,72.8 L626.6,66.6 L618.2,81.2 L609.9,74.1 L601.5,74.1 L593.2,86.3 L584.8,93.3 L576.4,93.3 L568.1,93.3 L559.7,93.3 L551.4,106.7 L543.0,127.1 L534.7,127.1 L526.3,127.1 L517.9,127.1 L509.6,123.2 L501.2,147.7 L492.9,147.7 L484.5,147.7 L476.1,147.7 L467.8,138.0 L459.4,156.7 L451.1,146.4 L442.7,157.8 L434.3,157.8 L426.0,158.0 L417.6,158.0 L409.3,145.0 L400.9,138.7 L392.5,138.7 L384.2,138.7 L375.8,138.7 L367.5,138.7 L359.1,138.7 L350.7,138.7 L342.4,131.4 L334.0,131.4 L325.7,131.4 L317.3,117.3 L308.9,117.3 L300.6,117.3 L292.2,133.2 L283.9,133.2 L275.5,141.7 L267.1,141.7 L258.8,141.7 L250.4,160.6 L242.1,160.6 L233.7,160.6 L225.3,160.6 L217.0,160.6 L208.6,160.6 L200.3,177.5 L191.9,177.5 L183.6,187.6 L175.2,195.1 L166.8,195.1 L158.5,202.9 L150.1,202.9 L141.8,202.9 L133.4,202.9 L125.0,197.0 L116.7,197.0 L108.3,197.0 L100.0,197.0 L91.6,192.9 L83.2,189.7 L74.9,189.7 L66.5,189.7 L58.2,184.0 L49.8,184.0 L41.4,184.0 L33.1,176.9 L24.7,176.9 L16.4,176.9 L8.0,176.9 Z" fill="var(--green)" fill-opacity="0.20"/>
+  <path d="M8.0,176.9 L16.4,176.9 L24.7,176.9 L33.1,176.9 L41.4,184.0 L49.8,184.0 L58.2,184.0 L66.5,189.7 L74.9,189.7 L83.2,189.7 L91.6,192.9 L100.0,197.0 L108.3,197.0 L116.7,197.0 L125.0,197.0 L133.4,202.9 L141.8,202.9 L150.1,202.9 L158.5,202.9 L166.8,195.1 L175.2,195.1 L183.6,187.6 L191.9,177.5 L200.3,177.5 L208.6,160.6 L217.0,160.6 L225.3,160.6 L233.7,160.6 L242.1,160.6 L250.4,160.6 L258.8,141.7 L267.1,141.7 L275.5,141.7 L283.9,133.2 L292.2,133.2 L300.6,117.3 L308.9,117.3 L317.3,117.3 L325.7,131.4 L334.0,131.4 L342.4,131.4 L350.7,138.7 L359.1,138.7 L367.5,138.7 L375.8,138.7 L384.2,138.7 L392.5,138.7 L400.9,138.7 L409.3,145.0 L417.6,158.0 L426.0,158.0 L434.3,157.8 L442.7,157.8 L451.1,146.4 L459.4,156.7 L467.8,138.0 L476.1,147.7 L484.5,147.7 L492.9,147.7 L501.2,147.7 L509.6,123.2 L517.9,127.1 L526.3,127.1 L534.7,127.1 L543.0,127.1 L551.4,106.7 L559.7,93.3 L568.1,93.3 L576.4,93.3 L584.8,93.3 L593.2,86.3 L601.5,74.1 L609.9,74.1 L618.2,81.2 L626.6,66.6 L635.0,72.8 L643.3,59.8 L651.7,59.8 L660.0,59.8 L668.4,59.8 L676.8,65.3 L685.1,71.9 L693.5,71.9 L701.8,71.9 L710.2,71.9 L718.6,71.9 L726.9,71.9 L735.3,54.6 L743.6,54.6 L752.0,51.8" fill="none" stroke="var(--blue)" stroke-width="1.25" stroke-opacity="0.7"/>
+  <path d="M8.0,176.9 L16.4,176.9 L24.7,176.9 L33.1,176.9 L41.4,176.9 L49.8,176.9 L58.2,176.9 L66.5,176.9 L74.9,176.9 L83.2,176.9 L91.6,176.9 L100.0,176.9 L108.3,176.9 L116.7,176.9 L125.0,176.9 L133.4,176.9 L141.8,176.9 L150.1,176.9 L158.5,176.9 L166.8,173.2 L175.2,173.2 L183.6,171.4 L191.9,167.1 L200.3,167.1 L208.6,157.3 L217.0,157.3 L225.3,157.3 L233.7,157.3 L242.1,157.3 L250.4,157.3 L258.8,126.5 L267.1,126.5 L275.5,126.5 L283.9,122.8 L292.2,122.8 L300.6,114.0 L308.9,114.0 L317.3,114.0 L325.7,114.0 L334.0,114.0 L342.4,114.0 L350.7,114.0 L359.1,114.0 L367.5,114.0 L375.8,114.0 L384.2,114.0 L392.5,114.0 L400.9,114.0 L409.3,114.0 L417.6,114.0 L426.0,114.0 L434.3,111.1 L442.7,111.1 L451.1,106.6 L459.4,106.6 L467.8,100.9 L476.1,100.9 L484.5,100.9 L492.9,100.9 L501.2,100.9 L509.6,70.1 L517.9,70.1 L526.3,70.1 L534.7,70.1 L543.0,70.1 L551.4,65.8 L559.7,59.6 L568.1,59.6 L576.4,59.6 L584.8,59.6 L593.2,62.8 L601.5,54.5 L609.9,54.5 L618.2,54.5 L626.6,47.0 L635.0,47.0 L643.3,39.9 L651.7,39.9 L660.0,39.9 L668.4,39.9 L676.8,39.9 L685.1,39.9 L693.5,39.9 L701.8,39.9 L710.2,39.9 L718.6,39.9 L726.9,39.9 L735.3,28.9 L743.6,28.9 L752.0,23.7" fill="none" stroke="var(--green)" stroke-width="2"/>
+</svg>
+    <div class="legend">
+      <span><span class="sw" style="background:var(--blue);opacity:.5"></span>Cash</span>
+      <span><span class="sw" style="background:var(--green);opacity:.55"></span>Inventory at cost</span>
+      <span><span class="sw" style="background:var(--green)"></span>Equity (top edge)</span>
+      <span class="faint">start $800.00 → end $3786.69</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Band calibration — realized vs predicted (n = 18)</h2>
+    <div class="cov">
+    <div class="cov-l">P10–P90</div>
+    <div class="cov-track" style="width:320px">
+      <div class="cov-fill" style="width:231px"></div>
+      <div class="cov-tick" style="left:256px" title="nominal 80%"></div>
+    </div>
+    <div class="cov-v num">72.2% <span class="faint">/ 80%</span></div>
+  </div>
+    <div class="cov">
+    <div class="cov-l">P25–P75</div>
+    <div class="cov-track" style="width:320px">
+      <div class="cov-fill" style="width:160px"></div>
+      <div class="cov-tick" style="left:160px" title="nominal 50%"></div>
+    </div>
+    <div class="cov-v num">50.0% <span class="faint">/ 50%</span></div>
+  </div>
+    <div class="foot">Tail balance: 11.1% of sales below P10, 16.7% above P90 (a well-calibrated ~10% / ~10% split means the band is neither too wide nor skewed).</div>
+  </div>
+
+  <div class="card">
+    <h2>By category</h2>
+    <table>
+      <thead><tr><th>Category</th><th class="r">Flips</th><th class="r">Cost</th><th class="r">Revenue</th><th class="r">Net</th><th class="r">ROI</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+      <td>Retro games</td>
+      <td class="r num">6</td>
+      <td class="r num">$701.17</td>
+      <td class="r num">$1863.76</td>
+      <td class="r num pos">$877.63</td>
+      <td class="r num pos">+125.2%</td>
+      <td class="spark"><span class="bar pos" style="width:100%"></span></td>
+    </tr>
+<tr>
+      <td>LEGO sets</td>
+      <td class="r num">5</td>
+      <td class="r num">$609.77</td>
+      <td class="r num">$1427.39</td>
+      <td class="r num pos">$596.63</td>
+      <td class="r num pos">+97.8%</td>
+      <td class="spark"><span class="bar pos" style="width:68%"></span></td>
+    </tr>
+<tr>
+      <td>Music gear</td>
+      <td class="r num">4</td>
+      <td class="r num">$612.52</td>
+      <td class="r num">$1018.20</td>
+      <td class="r num pos">$245.09</td>
+      <td class="r num pos">+40.0%</td>
+      <td class="spark"><span class="bar pos" style="width:28%"></span></td>
+    </tr>
+<tr>
+      <td>Vinyl records</td>
+      <td class="r num">1</td>
+      <td class="r num">$110.01</td>
+      <td class="r num">$175.81</td>
+      <td class="r num pos">$35.97</td>
+      <td class="r num pos">+32.7%</td>
+      <td class="spark"><span class="bar pos" style="width:4%"></span></td>
+    </tr>
+<tr>
+      <td>Vintage cameras</td>
+      <td class="r num">2</td>
+      <td class="r num">$324.49</td>
+      <td class="r num">$425.15</td>
+      <td class="r num pos">$31.37</td>
+      <td class="r num pos">+9.7%</td>
+      <td class="spark"><span class="bar pos" style="width:4%"></span></td>
+    </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="foot">Every figure above is computed by the real FLIP DESK engine and double-entry ledger over a seeded synthetic listing stream. This validates the machinery and the math, not a live trading edge. See docs/SIMULATION.md.</div>
+</div>
+</body>
+</html>

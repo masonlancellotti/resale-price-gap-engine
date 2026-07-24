@@ -22,7 +22,9 @@
     "web:dev": "npm -w @flip-desk/web run dev",
     "web:build": "npm -w @flip-desk/web run build",
     "web:typecheck": "npm -w @flip-desk/web run typecheck",
-    "web:start": "npm -w @flip-desk/web run start"
+    "web:start": "npm -w @flip-desk/web run start",
+    "sim": "tsx scripts/sim.ts",
+    "bench": "tsx scripts/bench.ts"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",

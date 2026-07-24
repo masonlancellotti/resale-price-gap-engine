@@ -32,6 +32,7 @@
     { "path": "./packages/handoff" },
     { "path": "./packages/verticals" },
     { "path": "./packages/store" },
+    { "path": "./packages/sim" },
     { "path": "./packages/runtime" },
     { "path": "./packages/api" },
     { "path": "./packages/flows" },
