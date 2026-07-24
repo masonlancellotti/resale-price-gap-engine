@@ -8,6 +8,8 @@ import type { Policy } from "@flip-desk/policy";
 export interface RuntimeConfig {
   readonly anthropicApiKey?: string;
   readonly liveHttp: boolean;
+  /** Filesystem path to a SQLite database (from `FLIP_DB_PATH`). Unset → the in-memory store. */
+  readonly dbPath?: string;
   readonly policy: Policy;
 }
 
@@ -26,9 +28,11 @@ export const DEFAULT_POLICY: Policy = {
 
 export function configFromEnv(env: Record<string, string | undefined>, policy: Policy = DEFAULT_POLICY): RuntimeConfig {
   const key = env["ANTHROPIC_API_KEY"];
+  const dbPath = env["FLIP_DB_PATH"];
   return {
     ...(key ? { anthropicApiKey: key } : {}),
     liveHttp: env["FLIP_LIVE_HTTP"] === "1",
+    ...(dbPath ? { dbPath } : {}),
     policy,
   };
 }

@@ -6,6 +6,13 @@ import type {
   OpportunityStatus,
   PnlSnapshot,
 } from "./records.js";
+import {
+  applyOpportunityFilter,
+  EMPTY_PNL,
+  sortAlerts,
+  sortHealth,
+  sortInventory,
+} from "./query.js";
 
 /**
  * The persistence seam (plan §5.3 conventions). Async so a Postgres/pgvector implementation
@@ -39,18 +46,6 @@ export interface Store {
   listHealth(): Promise<HealthRecord[]>;
 }
 
-const EMPTY_PNL: PnlSnapshot = {
-  revenueCents: 0n,
-  cogsCents: 0n,
-  feesCents: 0n,
-  netProfitCents: 0n,
-  inventoryValueCents: 0n,
-  flips: 0,
-};
-
-/** BAND ordering for the triage feed (push first). */
-const BAND_RANK: Record<string, number> = { push: 0, feed: 1, digest: 2, archive: 3 };
-
 export class InMemoryStore implements Store {
   readonly #opps = new Map<string, OpportunityRecord>();
   readonly #inv = new Map<string, InventoryRecord>();
@@ -63,15 +58,7 @@ export class InMemoryStore implements Store {
   }
 
   async listOpportunities(filter: OpportunityFilter = {}): Promise<OpportunityRecord[]> {
-    let rows = [...this.#opps.values()];
-    if (filter.status) rows = rows.filter((r) => r.status === filter.status);
-    if (filter.band) rows = rows.filter((r) => r.band === filter.band);
-    if (filter.takenOnly) rows = rows.filter((r) => r.taken);
-    return rows.sort((a, b) => {
-      const bandDiff = (BAND_RANK[a.band ?? "archive"] ?? 9) - (BAND_RANK[b.band ?? "archive"] ?? 9);
-      if (bandDiff !== 0) return bandDiff;
-      return (b.score ?? 0) - (a.score ?? 0);
-    });
+    return applyOpportunityFilter([...this.#opps.values()], filter);
   }
 
   async getOpportunity(id: string): Promise<OpportunityRecord | undefined> {
@@ -90,7 +77,7 @@ export class InMemoryStore implements Store {
   }
 
   async listInventory(): Promise<InventoryRecord[]> {
-    return [...this.#inv.values()].sort((a, b) => a.receivedAt.localeCompare(b.receivedAt));
+    return sortInventory([...this.#inv.values()]);
   }
 
   async getInventory(sku: string): Promise<InventoryRecord | undefined> {
@@ -110,7 +97,7 @@ export class InMemoryStore implements Store {
   }
 
   async listAlerts(): Promise<AlertRecord[]> {
-    return [...this.#alerts].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    return sortAlerts([...this.#alerts]);
   }
 
   async setPnl(p: PnlSnapshot): Promise<void> {
@@ -126,6 +113,6 @@ export class InMemoryStore implements Store {
   }
 
   async listHealth(): Promise<HealthRecord[]> {
-    return [...this.#health.values()].sort((a, b) => a.source.localeCompare(b.source));
+    return sortHealth([...this.#health.values()]);
   }
 }

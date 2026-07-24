@@ -13,7 +13,7 @@ import type { RuntimeConfig } from "./config.js";
 export interface RuntimeMode {
   readonly http: "live" | "fake";
   readonly llm: "live" | "fake";
-  readonly store: "memory";
+  readonly store: "memory" | "sqlite";
 }
 
 export interface Runtime {
@@ -30,6 +30,8 @@ export interface RuntimeOverrides {
   readonly fakeLlmHandler?: FakeHandler;
   readonly transport?: Transport;
   readonly store?: Store;
+  /** Reported {@link RuntimeMode.store} when a store is injected (defaults to "memory"). */
+  readonly storeMode?: "memory" | "sqlite";
 }
 
 export function buildRuntime(config: RuntimeConfig, overrides: RuntimeOverrides = {}): Runtime {
@@ -50,7 +52,31 @@ export function buildRuntime(config: RuntimeConfig, overrides: RuntimeOverrides 
     mode: {
       http: config.liveHttp ? "live" : "fake",
       llm: config.anthropicApiKey ? "live" : "fake",
-      store: "memory",
+      store: overrides.storeMode ?? "memory",
     },
   };
+}
+
+/**
+ * Resolve the persistence layer from config: `FLIP_DB_PATH` → a SQLite-backed store, otherwise the
+ * in-memory default. The `better-sqlite3`-backed store is imported *dynamically* and only when a path
+ * is set, so the default offline demo (and the Next.js bundle) never loads the native binding.
+ */
+export async function resolveStore(config: RuntimeConfig): Promise<{ store: Store; mode: "memory" | "sqlite" }> {
+  if (config.dbPath) {
+    const { SqliteStore } = await import("@flip-desk/store/sqlite");
+    return { store: new SqliteStore(config.dbPath), mode: "sqlite" };
+  }
+  return { store: new InMemoryStore(), mode: "memory" };
+}
+
+/**
+ * Async composition root that also selects persistence from config (WS1 wiring). Prefer this over the
+ * bare {@link buildRuntime} at real entry points (web app, CLIs); tests that don't need a DB can keep
+ * using the synchronous {@link buildRuntime}.
+ */
+export async function createRuntime(config: RuntimeConfig, overrides: RuntimeOverrides = {}): Promise<Runtime> {
+  if (overrides.store) return buildRuntime(config, overrides);
+  const { store, mode } = await resolveStore(config);
+  return buildRuntime(config, { ...overrides, store, storeMode: mode });
 }

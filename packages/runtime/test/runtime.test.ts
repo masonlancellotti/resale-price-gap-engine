@@ -1,7 +1,9 @@
 import { describe, expect, test } from "vitest";
 import { AnthropicLlm, FakeLlm } from "@flip-desk/llm";
 import { FakeTransport, FetchTransport } from "@flip-desk/net";
-import { buildRuntime, configFromEnv, DEFAULT_POLICY } from "../src/index.js";
+import { InMemoryStore } from "@flip-desk/store";
+import { SqliteStore } from "@flip-desk/store/sqlite";
+import { buildRuntime, configFromEnv, createRuntime, DEFAULT_POLICY, resolveStore } from "../src/index.js";
 
 describe("configFromEnv", () => {
   test("empty env → fully offline defaults", () => {
@@ -15,6 +17,33 @@ describe("configFromEnv", () => {
     const c = configFromEnv({ ANTHROPIC_API_KEY: "sk-x", FLIP_LIVE_HTTP: "1" });
     expect(c.anthropicApiKey).toBe("sk-x");
     expect(c.liveHttp).toBe(true);
+  });
+
+  test("FLIP_DB_PATH surfaces as dbPath; unset leaves it undefined", () => {
+    expect(configFromEnv({}).dbPath).toBeUndefined();
+    expect(configFromEnv({ FLIP_DB_PATH: "./data/flip.db" }).dbPath).toBe("./data/flip.db");
+  });
+});
+
+describe("store wiring — FLIP_DB_PATH selects the persistence layer", () => {
+  test("no dbPath → InMemoryStore, mode 'memory'", async () => {
+    const { store, mode } = await resolveStore(configFromEnv({}));
+    expect(store).toBeInstanceOf(InMemoryStore);
+    expect(mode).toBe("memory");
+  });
+
+  test("dbPath set → SqliteStore, mode 'sqlite'", async () => {
+    const { store, mode } = await resolveStore(configFromEnv({ FLIP_DB_PATH: ":memory:" }));
+    expect(store).toBeInstanceOf(SqliteStore);
+    expect(mode).toBe("sqlite");
+    (store as SqliteStore).close();
+  });
+
+  test("createRuntime reports the resolved store mode", async () => {
+    const rt = await createRuntime(configFromEnv({ FLIP_DB_PATH: ":memory:" }));
+    expect(rt.store).toBeInstanceOf(SqliteStore);
+    expect(rt.mode.store).toBe("sqlite");
+    (rt.store as SqliteStore).close();
   });
 });
 

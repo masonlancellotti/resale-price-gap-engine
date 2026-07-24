@@ -32,6 +32,8 @@ export interface OpportunityResult {
   readonly productId?: number;
   readonly matchMethod?: string;
   readonly valuationP50Cents?: Cents;
+  readonly valuationP10Cents?: Cents;
+  readonly valuationP90Cents?: Cents;
   readonly valuationConfidence?: number;
   readonly netP50Cents?: Cents;
   readonly cashAtRiskCents?: Cents;
@@ -212,6 +214,8 @@ export class Engine {
       productId: product.id,
       matchMethod: id.matchMethod,
       valuationP50Cents: valuation.p50Cents,
+      valuationP10Cents: valuation.p10Cents,
+      valuationP90Cents: valuation.p90Cents,
       valuationConfidence: valuation.confidence,
       netP50Cents: uw.netP50Cents,
       cashAtRiskCents: uw.cashAtRiskCents,

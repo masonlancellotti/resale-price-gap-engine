@@ -116,6 +116,8 @@ function toRecord(opp: OpportunityResult, raw: RawListing, i: number): Opportuni
     title: title.replace(/ M\d+ good condition$/, ""),
     ...(opp.productId !== undefined ? { productId: opp.productId } : {}),
     ...(opp.valuationP50Cents !== undefined ? { valuationP50Cents: opp.valuationP50Cents } : {}),
+    ...(opp.valuationP10Cents !== undefined ? { valuationP10Cents: opp.valuationP10Cents } : {}),
+    ...(opp.valuationP90Cents !== undefined ? { valuationP90Cents: opp.valuationP90Cents } : {}),
     ...(opp.netP50Cents !== undefined ? { netP50Cents: opp.netP50Cents } : {}),
     ...(opp.cashAtRiskCents !== undefined ? { cashAtRiskCents: opp.cashAtRiskCents } : {}),
     ...(opp.roi !== undefined ? { roi: opp.roi } : {}),

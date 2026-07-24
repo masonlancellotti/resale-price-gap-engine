@@ -18,6 +18,12 @@ secrets.*.yaml
 pgdata/
 miniodata/
 
+# SQLite databases (WS1) — keep the tree clean; a demo DB may be committed explicitly if small
+data/
+*.db
+*.db-wal
+*.db-shm
+
 # editor / os
 .DS_Store
 Thumbs.db

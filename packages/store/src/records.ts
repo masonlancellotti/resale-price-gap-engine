@@ -15,6 +15,8 @@ export interface OpportunityRecord {
   readonly title: string;
   readonly productId?: number;
   readonly valuationP50Cents?: Cents;
+  readonly valuationP10Cents?: Cents;
+  readonly valuationP90Cents?: Cents;
   readonly netP50Cents?: Cents;
   readonly cashAtRiskCents?: Cents;
   readonly roi?: number;
