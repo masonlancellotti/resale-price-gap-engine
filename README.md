@@ -1,5 +1,6 @@
 # Resale Price Gap Engine
-n> Internally named `flip-desk` — packages are scoped `@flipdesk/*`.
+
+> Internally named `flip-desk` — packages are scoped `@flipdesk/*`.
 
 **Compliance-first resale-arbitrage engine.** A 42-package TypeScript monorepo that runs the full
 **discover → identify → value → underwrite → rank → alert → buy → list → reprice → sell → ship →
